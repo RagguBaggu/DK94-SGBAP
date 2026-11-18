@@ -45,7 +45,7 @@ PACKAGES=""
 
 # ---- Linux ----
 B=$ROOT/build-release-linux
-cmake -S "$ROOT" -B "$B" -G Ninja -DCMAKE_BUILD_TYPE=Release -DDK94_PLAYER=ON -DTINYCC_DIR="$TINYCC_DIR" >/dev/null
+cmake -S "$ROOT" -B "$B" -G Ninja -DCMAKE_BUILD_TYPE=Release -DDK94_PLAYER=ON -DDK94_STATIC_SDL=ON -DTINYCC_DIR="$TINYCC_DIR" >/dev/null
 ninja -C "$B" dk94 >/dev/null
 NAME=DK94-Recomp-$VERSION-linux-x86_64
 S=$DIST/stage/$NAME
