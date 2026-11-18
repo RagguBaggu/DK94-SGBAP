@@ -1,0 +1,4 @@
+# Keep shell scripts and the Dockerfile LF everywhere: they run inside the
+# Linux build container, and CRLF breaks them there.
+*.sh       text eol=lf
+Dockerfile text eol=lf
