@@ -8,6 +8,7 @@
 #include "pad.h"
 #include "mods.h"
 #include "cheats.h"
+#include "eventlog.h"
 
 #define SAMPLE_RATE 48000
 
@@ -447,6 +448,8 @@ static void poll_events(void)
                 mods_toggle();   /* compare with / without mods */
             } else if (e.key.keysym.sym == SDLK_F8 && e.type == SDL_KEYDOWN && !e.key.repeat) {
                 cheats_toggle();
+            } else if (e.key.keysym.sym == SDLK_F7 && e.type == SDL_KEYDOWN && !e.key.repeat) {
+                eventlog_mark();   /* DK94_EVENTLOG marker */
             } else if (e.key.keysym.sym == SDLK_F10 && e.type == SDL_KEYDOWN && !e.key.repeat) {
                 cycle_view();
             } else if (e.key.keysym.sym == SDLK_TAB) {
@@ -525,6 +528,7 @@ void platform_frame(void)
             gb.buttons[0] = (uint8_t)mask;
         p = *end == ';' ? end + 1 : end;
     }
+    eventlog_frame();
     cheats_frame();
     moddump_frame();
     modaudio_frame();

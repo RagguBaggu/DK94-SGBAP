@@ -24,5 +24,8 @@ switch ($Target) {
 
 $tty = @()
 if ($Target -eq "shell") { $tty = @("-it") }
+# Compiler/CMake warnings go to stderr; with "Stop", Windows PowerShell would
+# turn them into a terminating error when the output is redirected.
+$ErrorActionPreference = "Continue"
 docker run --rm @tty -e HOME=/tmp -v "${root}:/src" $image sh -c $cmd
 exit $LASTEXITCODE

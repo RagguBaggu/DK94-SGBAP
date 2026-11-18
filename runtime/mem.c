@@ -5,6 +5,7 @@
 #include "gb.h"
 #include "files.h"
 #include "mods.h"
+#include "eventlog.h"
 #include "recomp/recomp.h"
 
 Gb gb;
@@ -190,6 +191,8 @@ void mem_write(uint16_t a, uint8_t v)
 {
     if (trace_enabled)
         trace_write(a, v);
+    if (eventlog_enabled)
+        eventlog_write(a, v);   /* before the write: it compares with the old value */
     if (a < 0x8000) {
         switch (a >> 13) {
         case 0: {

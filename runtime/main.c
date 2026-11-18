@@ -8,6 +8,7 @@
 #include "launcher.h"
 #include "mods.h"
 #include "cheats.h"
+#include "eventlog.h"
 #include "recomp/recomp.h"
 
 uint32_t expected_rom_crc32(void) { return dk94_game.rom_crc32; }
@@ -217,6 +218,7 @@ int main(int argc, char **argv)
         fprintf(stderr, "new games start at stage %s\n", label);
         cheats_start_at(start_stage);
     }
+    eventlog_init();
     cpu_reset();
     run_forever();
     return 0;
